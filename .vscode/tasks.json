@@ -1,0 +1,19 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build", // Nome da tarefa (usada no launch.json).
+            "type": "shell", // Usa o terminal para executar o comando.
+            "command": "make", // Compilador.
+            "args": [
+                "all"
+            ],
+            "group": {
+                "kind": "build", // Define como uma tarefa de build.
+                "isDefault": true // Torna essa a tarefa padrão.
+            },
+            "problemMatcher": [], // Detecta erros e avisos do compilador.
+            "detail": "Compilação usando Makefile."
+        }
+    ]
+}

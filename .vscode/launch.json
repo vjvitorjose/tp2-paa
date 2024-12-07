@@ -1,0 +1,26 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/executavel", // Caminho do executável gerado.
+            "args": [], // Argumentos para passar ao programa (se necessário).
+            "stopAtEntry": true, // True para pausar na primeira linha.
+            "cwd": "${workspaceFolder}", // Diretório de trabalho.
+            "environment": [], // Variáveis de ambiente (se necessário).
+            "externalConsole": false, // Usa um terminal externo.
+            "MIMode": "gdb", // Modo de depuração. Pode ser "lldb" em macOS.
+            "miDebuggerPath": "/usr/bin/gdb",
+            "setupCommands": [
+                {
+                    "description": "Habilitar impressão de símbolos",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "build" // Compila o programa antes de iniciar o debug.
+        }
+    ]
+}
