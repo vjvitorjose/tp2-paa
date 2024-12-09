@@ -38,8 +38,24 @@ int resolveSudoku(int** sudoku){
     if(sudoku == NULL)
         return 0;
 
+    int** auxiliar = criaAuxiliar(sudoku);
+
     for(int i = 0; i < 9; i++){
         for(int j = 0; j < 9; j++){
+
+            imprimeSudoku(sudoku);
+            printf("------------------------\n");
+            imprimeSudoku(auxiliar);
+            printf("------------------------\n");
+            printf("i %d j %d\n", i, j);
+            printf("valor %d\n", sudoku[i][j]);
+            printf("auxiliar %d\n", auxiliar[i][j]);
+
+            if(sudoku[i][j] == 11)
+                return 0;
+
+            if(auxiliar[i][j])
+                continue;
 
             if(sudoku[i][j] == 0)
                 sudoku[i][j]++;
@@ -51,21 +67,26 @@ int resolveSudoku(int** sudoku){
 
                 sudoku[i][j] = 0;
 
-                if(j > 0){
-                    j -= 2;
-                }
+                do{
+                    if(j > 0){
+                        j--;
+                    }
 
-                else{
-                    i--;
-                    j = 7;
-                }
+                    else{
+                        i--;
+                        j = 8;
+                    }
+                }while(auxiliar[i][j] == 1);
 
-                sudoku[i][j+1]++;
+                sudoku[i][j]++;
+                j--;
 
             }
 
         }
     }
+
+    freeSudoku(auxiliar);
 
     return 1;
 
@@ -135,5 +156,25 @@ void zeraSudoku(int** sudoku){
             sudoku[i][j] = 0;
         }
     }
+
+}
+
+int** criaAuxiliar(int** sudoku){
+
+    int** auxiliar = malloc(9*sizeof(int*));
+    for(int i = 0; i < 9; i++){
+        auxiliar[i] = (int*)malloc(9*sizeof(int));
+    }
+
+    zeraSudoku(auxiliar);
+
+    for(int i = 0; i < 9; i++){
+        for(int j = 0; j < 9; j++){
+            if(sudoku[i][j] != 0)
+                auxiliar[i][j] = 1;
+        }
+    }
+
+    return auxiliar;
 
 }

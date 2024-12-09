@@ -13,3 +13,5 @@ int verificaQuadrado(int** sudoku, int i, int j);
 void imprimeSudoku(int** sudoku);
 
 void zeraSudoku(int** sudoku);
+
+int** criaAuxiliar(int** sudoku);
