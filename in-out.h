@@ -3,6 +3,6 @@
 
 #include "sudoku-config.h"
 
-int leituraSudoku(char* arqentrada, char* arqsaida);
+int leituraBacktracking(char* arqentrada, char* arqsaida);
 int leituraHeuristica(char* arqentrada, char* arqsaida);
 int escreveSudoku(FILE* saida, int** sudoku);

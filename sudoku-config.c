@@ -31,6 +31,7 @@ void imprimeSudoku(int** sudoku){
         }
         printf("\n");
     }
+    printf("--------------------------------\n");
 
 }
 
@@ -190,6 +191,10 @@ int* flagsLinha(int** sudoku, int i, int j){
     int* flags = malloc(9*sizeof(int));
 
     for(int c = 0; c < 9; c++){
+        flags[c] = 0;
+    }
+
+    for(int c = 0; c < 9; c++){
         if(sudoku[i][c] != 0)
             flags[sudoku[i][c]-1] = 1;
     }
@@ -203,6 +208,10 @@ int* flagsColuna(int** sudoku, int i, int j){
     int* flags = malloc(9*sizeof(int));
 
     for(int l = 0; l < 9; l++){
+        flags[l] = 0;
+    }
+
+    for(int l = 0; l < 9; l++){
         if(sudoku[l][j] != 0)
             flags[l] = 1;
     }
@@ -214,6 +223,10 @@ int* flagsColuna(int** sudoku, int i, int j){
 int* flagsQuadrado(int** sudoku, int i, int j){
 
     int* flags = malloc(9*sizeof(int));
+
+    for(int l = 0; l < 9; l++){
+        flags[l] = 0;
+    }
 
     for(int l = i-(i%3); l < i-(i%3)+3; l++){
         for(int c = j-(j%3); c < j-(j%3)+3; c++){
@@ -308,44 +321,44 @@ int exclusaoQuadrado(int** sudoku, int i, int j){
 
 }
 
-int solitaria(int** sudoku, int i, int j){
+// int solitaria(int** sudoku, int i, int j){
 
-    if(!solitariaLinha(sudoku, i, j))
-        if(!solitariaColuna(sudoku, i, j))
-            if(!solitariaQuadrado(sudoku, i, j))
-                return 0;
-    return 1;
+//     if(!solitariaLinha(sudoku, i, j))
+//         if(!solitariaColuna(sudoku, i, j))
+//             if(!solitariaQuadrado(sudoku, i, j))
+//                 return 0;
+//     return 1;
 
-}
+// }
 
-int copiaLinha(int** matriz, int i, int* origem){
-    for(int j = 0; j < 9; j++){
-        matriz[i][j] = origem[j];
-    }
-}
+// int copiaLinha(int** matriz, int i, int* origem){
+//     for(int j = 0; j < 9; j++){
+//         matriz[i][j] = origem[j];
+//     }
+// }
 
-int solitariaLinha(int** sudoku, int i, int j){
+// int solitariaLinha(int** sudoku, int i, int j){
 
-    int** solucoes = criaSudoku();
+//     int** solucoes = criaSudoku();
 
-    int* flags = NULL;
-    for(int c = 0; c < 9; c++){
-        if(c != j){
-            flags = flagsLinha(sudoku, i, j);
-            copiaLinha(solucoes, c, flags);
-            free(flags);
-        }
-    }
+//     int* flags = NULL;
+//     for(int c = 0; c < 9; c++){
+//         if(c != j){
+//             flags = flagsLinha(sudoku, i, j);
+//             copiaLinha(solucoes, c, flags);
+//             free(flags);
+//         }
+//     }
 
-    int counter = 0;
+//     int counter = 0;
 
-    for(int c = 0; c < 9; c++){
-        for(int l = 0; l < 9; l++){
-            counter += solucoes[l][c];
-            if(counter == 1)
-        }
-    }
+//     for(int c = 0; c < 9; c++){
+//         for(int l = 0; l < 9; l++){
+//             counter += solucoes[l][c];
+//             if(counter == 1)
+//         }
+//     }
 
-    freeSudoku(solucoes);
+//     freeSudoku(solucoes);
 
-}
+// }
