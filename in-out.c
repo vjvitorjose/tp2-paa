@@ -32,7 +32,7 @@ int leituraSudoku(char* arqentrada, char* arqsaida){
                     buffer[j*2] = '0';
                 sudoku[i][j] = buffer[j*2] - '0';
             }
-            resolveSudoku(sudoku);
+            backtracking(sudoku);
             escreveSudoku(saida, sudoku);
             i = 0;
             fgets(buffer, sizeof(buffer), entrada);
@@ -71,6 +71,62 @@ int escreveSudoku(FILE* saida, int** sudoku){
 
     fprintf(saida, "\n");
 
+    return 1;
+
+}
+
+int leituraHeuristica(char* arqentrada, char* arqsaida){
+
+    FILE* entrada = fopen(arqentrada, "r");
+    if(!entrada)
+        return 0;
+
+    FILE* saida = fopen(arqsaida, "w");
+    if(!saida){
+        fclose(entrada);
+        return 0;
+    }
+
+    int** sudoku = criaSudoku();
+    if(!sudoku){
+        fclose(entrada);
+        fclose(saida);
+        return 0;
+    }
+
+    int i = 0;
+    char buffer[19];
+
+    while(!feof(entrada)){
+
+        fgets(buffer, sizeof(buffer), entrada);
+
+        if(i == 8){
+            for(int j = 0; j < 9; j++){
+                if(buffer[j*2] == 'v')
+                    buffer[j*2] = '0';
+                sudoku[i][j] = buffer[j*2] - '0';
+            }
+            heuristica(sudoku);
+            escreveSudoku(saida, sudoku);
+            i = 0;
+            fgets(buffer, sizeof(buffer), entrada);
+            continue;
+        }
+
+        for(int j = 0; j < 9; j++){
+            if(buffer[j*2] == 'v')
+                buffer[j*2] = '0';
+            sudoku[i][j] = buffer[j*2] - '0';
+        }
+
+        i++;
+
+    }
+
+    fclose(entrada);
+    fclose(saida);
+    freeSudoku(sudoku);
     return 1;
 
 }

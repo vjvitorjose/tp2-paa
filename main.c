@@ -6,7 +6,7 @@
 
 int main(){
 
-    leituraSudoku("entrada.txt", "saida.txt");
+    leituraHeuristica("entrada.txt", "saida.txt");
 
     return 0;
 
