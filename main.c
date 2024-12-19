@@ -30,7 +30,7 @@ int main(int argc, char** argv){
         }
     }
 
-    leituraHeuristica(entrada, saida);
+    leituraBacktracking(entrada, saida);
 
     return 0;
 
